@@ -1,4 +1,7 @@
-package com.android.retrofitsampleapp;
+package com.android.retrofitsampleapp.data;
+
+import com.android.retrofitsampleapp.domain.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.GitUserEntity;
 
 import java.util.List;
 
