@@ -42,15 +42,10 @@ public class MainActivity extends AppCompatActivity {
         initView();
 
         loadProjects("borhammere");
-
-        //многопоточность. Запуск паралельного потока
-//        new Thread(){
-//          //todo
-//        }.start();
     }
 
     private void loadProjects(String username) {
-        showProgress(false);
+        showProgress(true);
         gitHubApi.getProject(username).enqueue(new Callback<List<GitProjectEntity>>() {
             //получение ответа
             @Override
@@ -84,8 +79,8 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void showProgress(boolean showShow) {
-        if (showShow) {
+    private void showProgress(boolean shouldShow) {
+        if (shouldShow) {
             recyclerView.setVisibility(View.GONE);//скрываем view со списком
             progressBar.setVisibility(View.VISIBLE);//показываем прогресс загрузки
         } else {

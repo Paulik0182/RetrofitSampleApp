@@ -24,8 +24,7 @@ public class GitProjectAdapter extends RecyclerView.Adapter<GitProjectViewHolder
     @Override
     public GitProjectViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new GitProjectViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_git_project, parent, false
-                ));
+                .inflate(R.layout.item_git_project, parent, false));
     }
 
     @Override
