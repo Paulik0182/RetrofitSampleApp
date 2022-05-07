@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
 import com.android.retrofitsampleapp.data.GitHubApi;
-import com.android.retrofitsampleapp.domain.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.GitUserEntity;
 
 import java.util.List;
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
-    private final GitProjectAdapter adapter = new GitProjectAdapter();
+    private final GitUsersAdapter adapter = new GitUsersAdapter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,23 +41,23 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
 
-        loadProjects("borhammere");
+        loadUsers();
     }
 
-    private void loadProjects(String username) {
+    private void loadUsers() {
         showProgress(true);
-        gitHubApi.getProject(username).enqueue(new Callback<List<GitProjectEntity>>() {
+        gitHubApi.getUsers().enqueue(new Callback<List<GitUserEntity>>() {
             //получение ответа
             @Override
-            public void onResponse(Call<List<GitProjectEntity>> call, Response<List<GitProjectEntity>> response) {
+            public void onResponse(Call<List<GitUserEntity>> call, Response<List<GitUserEntity>> response) {
                 showProgress(false);
 //                if (response.code()==200){  //проверка кода, код 200 означает успех
                 if (response.isSuccessful()) { //isSuccessful - это уже проверка кодов от 200 до 300
-                    List<GitProjectEntity> projects = response.body(); // body - это тело запроса, это будет список репозиториев которые мы ищем. Здесь мы получаем список проектов
+                    List<GitUserEntity> users = response.body(); // body - это тело запроса, это будет список репозиториев которые мы ищем. Здесь мы получаем список проектов
 
-                    adapter.setData(projects);
+                    adapter.setData(users);
                     //test
-                    Toast.makeText(MainActivity.this, "Size" + projects.size(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Size" + users.size(), Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(MainActivity.this, "Error code" + response.code(), Toast.LENGTH_LONG).show();
                 }
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
             //получение ошибки. чтото сломалось (нет сети и т.д.)
             @Override
-            public void onFailure(Call<List<GitProjectEntity>> call, Throwable t) {
+            public void onFailure(Call<List<GitUserEntity>> call, Throwable t) {
                 showProgress(false);
                 Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
