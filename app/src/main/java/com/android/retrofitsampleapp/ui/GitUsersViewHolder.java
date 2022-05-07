@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
+import com.android.retrofitsampleapp.domain.GitUserEntity;
 
 public class GitUsersViewHolder extends RecyclerView.ViewHolder {
 
@@ -17,8 +18,8 @@ public class GitUsersViewHolder extends RecyclerView.ViewHolder {
         super(itemView);
     }
 
-    public void bind(GitUsersAdapter gitUsersAdapter) {
-        titleTextView.setText(gitUsersAdapter.getLogin());
-        subtitleTextView.setText(gitUsersAdapter.getNode_id());
+    public void bind(GitUserEntity gitUserEntity) {
+        titleTextView.setText(gitUserEntity.getLogin());
+        subtitleTextView.setText(gitUserEntity.getNode_id());
     }
 }
