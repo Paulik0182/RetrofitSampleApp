@@ -20,6 +20,6 @@ public class GitUsersViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(GitUserEntity gitUserEntity) {
         titleTextView.setText(gitUserEntity.getLogin());
-        subtitleTextView.setText(gitUserEntity.getNode_id());
+        subtitleTextView.setText(gitUserEntity.getNodeId());
     }
 }

@@ -24,7 +24,7 @@ public class GitUsersAdapter extends RecyclerView.Adapter<GitUsersViewHolder> {
     @Override
     public GitUsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new GitUsersViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_git_project, parent, false));
+                .inflate(R.layout.item_git_user, parent, false));
     }
 
     @Override

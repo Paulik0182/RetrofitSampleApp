@@ -1,15 +1,19 @@
 package com.android.retrofitsampleapp.domain;
 
+import com.google.gson.annotations.SerializedName;
+
 public class GitUserEntity {
 
     private int id;
     private String login;
-    private String node_id;
+
+    @SerializedName("node_id")
+    private String nodeId;
 
     public GitUserEntity(int id, String name, String description) {
         this.id = id;
         this.login = name;
-        this.node_id = description;
+        this.nodeId = description;
     }
 
     public int getId() {
@@ -28,11 +32,11 @@ public class GitUserEntity {
         this.login = login;
     }
 
-    public String getNode_id() {
-        return node_id;
+    public String getNodeId() {
+        return nodeId;
     }
 
-    public void setNode_id(String node_id) {
-        this.node_id = node_id;
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
     }
 }
