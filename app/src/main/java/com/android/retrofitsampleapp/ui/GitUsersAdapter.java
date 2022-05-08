@@ -14,17 +14,28 @@ import java.util.List;
 public class GitUsersAdapter extends RecyclerView.Adapter<GitUsersViewHolder> {
 
     private List<GitUserEntity> data;
+    private OnItemClickListener listener;//завели слушатель
 
-    public void setData(List<GitUserEntity> users) {
-        data = users;
-        notifyDataSetChanged();
+    //сохнанили слушатель. после интерфейса идем сюда
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public GitUsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new GitUsersViewHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.item_git_user, parent, false));
+                .inflate(R.layout.item_git_user, parent, false), listener);// listener - передаем далее во viewHolder
+    }
+
+    public void setData(List<GitUserEntity> users) {
+        data = users;
+        notifyDataSetChanged();
+    }
+
+    //интерфейс со слушателем
+    public interface OnItemClickListener {
+        void onItemClick(GitUserEntity user);
     }
 
     @Override
