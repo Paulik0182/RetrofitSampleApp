@@ -1,5 +1,6 @@
 package com.android.retrofitsampleapp.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -23,7 +24,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class UsersActivity extends AppCompatActivity {
 
     //увеличили время по таймауту при загрузке из сети (без этого, по умолчанию 10сек.)
     private final OkHttpClient client = new OkHttpClient.Builder()
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_users);
 
         initView();
 
@@ -74,9 +75,9 @@ public class MainActivity extends AppCompatActivity {
 
                     adapter.setData(users);
                     //test
-                    Toast.makeText(MainActivity.this, "Size" + users.size(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(UsersActivity.this, "Size" + users.size(), Toast.LENGTH_LONG).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "Error code" + response.code(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(UsersActivity.this, "Error code" + response.code(), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -84,12 +85,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<GitUserEntity>> call, Throwable t) {
                 showProgress(false);
-                Toast.makeText(MainActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(UsersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
 
     private void openUserScreen(GitUserEntity user) {
+        final Intent intent = new Intent(this, ProjectsActivity.class);
+        startActivity(intent);
         Toast.makeText(this, "Нажали " + user.getLogin(), Toast.LENGTH_SHORT).show();
     }
 
