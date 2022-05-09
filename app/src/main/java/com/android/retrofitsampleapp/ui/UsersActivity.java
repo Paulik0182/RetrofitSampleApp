@@ -91,7 +91,7 @@ public class UsersActivity extends AppCompatActivity {
     }
 
     private void openUserScreen(GitUserEntity user) {
-        final Intent intent = new Intent(this, ProjectsActivity.class);
+        Intent intent = ProjectsActivity.getLaunchIntent(this, user.getLogin());
         startActivity(intent);
         Toast.makeText(this, "Нажали " + user.getLogin(), Toast.LENGTH_SHORT).show();
     }
