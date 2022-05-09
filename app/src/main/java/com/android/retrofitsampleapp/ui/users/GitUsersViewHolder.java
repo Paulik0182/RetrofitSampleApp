@@ -1,4 +1,4 @@
-package com.android.retrofitsampleapp.ui;
+package com.android.retrofitsampleapp.ui.users;
 
 import android.view.View;
 import android.widget.TextView;
