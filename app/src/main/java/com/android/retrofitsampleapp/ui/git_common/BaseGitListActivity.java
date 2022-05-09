@@ -3,6 +3,7 @@ package com.android.retrofitsampleapp.ui.git_common;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,7 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.retrofitsampleapp.data.GitHubApi;
 import com.android.retrofitsampleapp.ui.common.BaseActivity;
 
-public abstract class BaseGitListActivity extends BaseActivity {
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public abstract class BaseGitListActivity<T> extends BaseActivity {
 
     protected ProgressBar progressBar;
     protected RecyclerView recyclerView;
@@ -50,4 +57,34 @@ public abstract class BaseGitListActivity extends BaseActivity {
         }
     }
 
+    protected final void loadData() {
+        showProgress(true);
+        getRetrofitCall().enqueue(new Callback<List<T>>() {
+            @Override
+            public void onResponse(Call<List<T>> call, Response<List<T>> response) {
+                showProgress(false);
+                if (response.isSuccessful()) { //isSuccessful - это уже проверка кодов от 200 до 300
+                    onSuccess(response.body());
+
+                } else {
+                    Toast.makeText(BaseGitListActivity.this, "Error code" + response.code(), Toast.LENGTH_SHORT).show();
+                    onError(new Throwable("Error code = " + response.code()));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<T>> call, Throwable t) {
+                showProgress(false);
+                onError(t);
+                Toast.makeText(app, t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    protected abstract Call<List<T>> getRetrofitCall();
+
+    protected abstract void onSuccess(List<T> data);
+
+    protected abstract void onError(Throwable t);
 }

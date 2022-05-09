@@ -12,10 +12,8 @@ import com.android.retrofitsampleapp.ui.projects.ProjectsActivity;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class UsersActivity extends BaseGitListActivity {
+public class UsersActivity extends BaseGitListActivity<GitUserEntity> {
 
     private final GitUsersAdapter adapter = new GitUsersAdapter();
 
@@ -32,35 +30,22 @@ public class UsersActivity extends BaseGitListActivity {
         // а :: означает, что этот метод использовать как лямду чтобы передать его в адаптер
         // и приобразовать его в OnItemClickListener (это синтаксический сахр)
 
-        loadUsers();
+        loadData();
     }
 
-    private void loadUsers() {
-        showProgress(true);
-        getGitHubApi().getUsers().enqueue(new Callback<List<GitUserEntity>>() {
-            //получение ответа
-            @Override
-            public void onResponse(Call<List<GitUserEntity>> call, Response<List<GitUserEntity>> response) {
-                showProgress(false);
-//                if (response.code()==200){  //проверка кода, код 200 означает успех
-                if (response.isSuccessful()) { //isSuccessful - это уже проверка кодов от 200 до 300
-                    List<GitUserEntity> users = response.body(); // body - это тело запроса, это будет список репозиториев которые мы ищем. Здесь мы получаем список проектов
+    @Override
+    protected Call<List<GitUserEntity>> getRetrofitCall() {
+        return getGitHubApi().getUsers();
+    }
 
-                    adapter.setData(users);
-                    //test
-                    Toast.makeText(UsersActivity.this, "Size" + users.size(), Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(UsersActivity.this, "Error code" + response.code(), Toast.LENGTH_LONG).show();
-                }
-            }
+    @Override
+    protected void onSuccess(List<GitUserEntity> data) {
+        adapter.setData(data);
+    }
 
-            //получение ошибки. чтото сломалось (нет сети и т.д.)
-            @Override
-            public void onFailure(Call<List<GitUserEntity>> call, Throwable t) {
-                showProgress(false);
-                Toast.makeText(UsersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
+    @Override
+    protected void onError(Throwable t) {
+        Toast.makeText(UsersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
     }
 
     private void openUserScreen(GitUserEntity user) {
