@@ -24,6 +24,9 @@
         <activity
             android:name=".ui.projects.ProjectsActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.settings.SettingsActivity"
+            android:exported="true" />
     </application>
 
 </manifest>
