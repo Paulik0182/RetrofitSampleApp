@@ -9,8 +9,8 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.retrofitsampleapp.UsedConst;
 import com.android.retrofitsampleapp.data.GitHubApi;
-import com.android.retrofitsampleapp.ui.common.BaseActivity;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public abstract class BaseGitListActivity<T> extends BaseActivity {
+public abstract class BaseGitListActivity<T> extends UsedConst {
 
     protected ProgressBar progressBar;
     protected RecyclerView recyclerView;
