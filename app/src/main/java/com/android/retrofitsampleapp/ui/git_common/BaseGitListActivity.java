@@ -5,12 +5,13 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.retrofitsampleapp.UsedConst;
 import com.android.retrofitsampleapp.data.GitHubApi;
+import com.android.retrofitsampleapp.ui.common.BaseActivity;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public abstract class BaseGitListActivity<T> extends UsedConst {
+public abstract class BaseGitListActivity<T> extends BaseActivity {
 
     protected ProgressBar progressBar;
     protected RecyclerView recyclerView;
@@ -61,7 +62,7 @@ public abstract class BaseGitListActivity<T> extends UsedConst {
         showProgress(true);
         getRetrofitCall().enqueue(new Callback<List<T>>() {
             @Override
-            public void onResponse(Call<List<T>> call, Response<List<T>> response) {
+            public void onResponse(@NonNull Call<List<T>> call, @NonNull Response<List<T>> response) {
                 showProgress(false);
                 if (response.isSuccessful()) { //isSuccessful - это уже проверка кодов от 200 до 300
                     onSuccess(response.body());
@@ -73,7 +74,7 @@ public abstract class BaseGitListActivity<T> extends UsedConst {
             }
 
             @Override
-            public void onFailure(Call<List<T>> call, Throwable t) {
+            public void onFailure(@NonNull Call<List<T>> call, @NonNull Throwable t) {
                 showProgress(false);
                 onError(t);
                 Toast.makeText(app, t.getMessage(), Toast.LENGTH_SHORT).show();

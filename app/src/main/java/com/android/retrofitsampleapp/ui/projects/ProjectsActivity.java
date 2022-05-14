@@ -17,6 +17,8 @@ import retrofit2.Call;
 
 public class ProjectsActivity extends BaseGitListActivity<GitProjectEntity> {
 
+    private static final String LOGIN_EXTRA_KEY = "LOGIN_EXTRA_KEY";
+
     private final GitProjectAdapter adapter = new GitProjectAdapter();
 
     public static Intent getLaunchIntent(Context context, String login) {

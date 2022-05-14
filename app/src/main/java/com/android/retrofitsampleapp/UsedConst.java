@@ -1,24 +1,24 @@
 package com.android.retrofitsampleapp;
 
-import com.android.retrofitsampleapp.ui.common.BaseActivity;
+/**
+ * Константы нужно писать там (в тех классах) где они применяютяс.
+ * Иногда константы можно выносить в отдельный класс, например, интернет адресах, ссылки,
+ * числовые константы, наименование и т.д.
+ * interface сделан для того, чтобы сгрупировать константы по тематике или по другомы обобщающему
+ * признаку.
+ */
 
-public abstract class UsedConst extends BaseActivity {
+public final class UsedConst {
 
-    protected static final String LOGIN_EXTRA_KEY = "LOGIN_EXTRA_KEY";
+    private UsedConst() {
+        //конструктор, это для того чтобы нельзя было сделать с этим классом
+    }
 
-    protected static final String HTTPS_GIT_CONST = "https://api.github.com/";
+    public interface httpsConst {
+        String GIT_CONST = "https://api.github.com/";
+    }
 
-    protected static final int ITEM_OUT_CONST = 15;
-
-//    protected static interface сommonConstKey{
-//        protected static final String LOGIN_EXTRA_KEY = "LOGIN_EXTRA_KEY";
-//    }
-//
-//    protected static interface httpsConst{
-//        protected static final String GIT_CONST = "https://api.github.com/";
-//    }
-//
-//    protected static interface settingTimeConst{
-//        protected static final int ITEM_OUT_CONST = 15;
-//    }
+    public interface settingTimeConst {
+        int ITEM_OUT_CONST = 15;
+    }
 }
