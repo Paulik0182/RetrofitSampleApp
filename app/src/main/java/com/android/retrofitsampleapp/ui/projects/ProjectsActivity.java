@@ -5,15 +5,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.retrofitsampleapp.R;
 import com.android.retrofitsampleapp.domain.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.GitUserEntity;
 import com.android.retrofitsampleapp.ui.git_common.BaseGitListActivity;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProjectsActivity extends BaseGitListActivity<GitProjectEntity> {
 
@@ -40,14 +44,27 @@ public class ProjectsActivity extends BaseGitListActivity<GitProjectEntity> {
 
         setContractViews(progressBar, recyclerView);
 
+        loadUser(getLogin());
         loadData();
-
-        //второй вариант написания
-//        adapter.setOnItemClickListener(user ->{
-//            openUserScreen(user);
-//        });
-
     }
+
+    private void loadUser(String login) {
+        getGitHubApi().getUser(login).enqueue(new Callback<GitUserEntity>() {
+            @Override
+            public void onResponse(@NonNull Call<GitUserEntity> call,
+                                   @NonNull Response<GitUserEntity> response) {
+                Toast.makeText(ProjectsActivity.this,
+                        response.body().getAvatarUrl(),
+                        Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<GitUserEntity> call, @NonNull Throwable t) {
+                Toast.makeText(ProjectsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     protected Call<List<GitProjectEntity>> getRetrofitCall() {
