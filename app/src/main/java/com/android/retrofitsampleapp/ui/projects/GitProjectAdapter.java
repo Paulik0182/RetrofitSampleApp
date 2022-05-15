@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.retrofitsampleapp.R;
 import com.android.retrofitsampleapp.domain.GitProjectEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GitProjectAdapter extends RecyclerView.Adapter<GitProjectViewHolder> {
 
-    private List<GitProjectEntity> data;
+    private List<GitProjectEntity> data = new ArrayList<>();//прости завели пустой список.
 
     @SuppressLint("NotifyDataSetChanged")
     public void setData(List<GitProjectEntity> project) {
