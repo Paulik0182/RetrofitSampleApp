@@ -1,5 +1,6 @@
-package com.android.retrofitsampleapp.ui;
+package com.android.retrofitsampleapp.ui.projects;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -15,6 +16,7 @@ public class GitProjectAdapter extends RecyclerView.Adapter<GitProjectViewHolder
 
     private List<GitProjectEntity> data;
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setData(List<GitProjectEntity> project) {
         data = project;
         notifyDataSetChanged();
