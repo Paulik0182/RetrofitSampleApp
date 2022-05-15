@@ -3,6 +3,7 @@ package com.android.retrofitsampleapp.ui.projects;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,7 @@ public class ProjectsActivity extends BaseGitListActivity<GitProjectEntity> {
     private static final String LOGIN_EXTRA_KEY = "LOGIN_EXTRA_KEY";
 
     private final GitProjectAdapter adapter = new GitProjectAdapter();
+    private ImageView avatarImageView;
 
     public static Intent getLaunchIntent(Context context, String login) {
         Intent intent = new Intent(context, ProjectsActivity.class);
@@ -53,9 +55,9 @@ public class ProjectsActivity extends BaseGitListActivity<GitProjectEntity> {
             @Override
             public void onResponse(@NonNull Call<GitUserEntity> call,
                                    @NonNull Response<GitUserEntity> response) {
-                Toast.makeText(ProjectsActivity.this,
-                        response.body().getAvatarUrl(),
-                        Toast.LENGTH_SHORT).show();
+                final String avatarUrl = response.body().getAvatarUrl();
+                Toast.makeText(ProjectsActivity.this, avatarUrl, Toast.LENGTH_SHORT).show();
+                setAvatar(avatarUrl);
             }
 
             @Override
@@ -65,6 +67,9 @@ public class ProjectsActivity extends BaseGitListActivity<GitProjectEntity> {
         });
     }
 
+    private void setAvatar(String avatarUrl) {
+//        avatarImageView.
+    }
 
     @Override
     protected Call<List<GitProjectEntity>> getRetrofitCall() {
@@ -85,6 +90,8 @@ public class ProjectsActivity extends BaseGitListActivity<GitProjectEntity> {
         progressBar = findViewById(R.id.progress_bar);
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
+
+        avatarImageView = findViewById(R.id.avatar_image_view);
     }
 
     private String getLogin() {
