@@ -32,8 +32,8 @@ public class GitUsersViewHolder extends RecyclerView.ViewHolder {
         titleTextView.setText(gitUserEntity.getLogin());
         subtitleTextView.setText(gitUserEntity.getNodeId());
 
-        Glide.with(this)
-                .load(gitUserEntity)
+        Glide.with(itemView)
+                .load(gitUserEntity.getAvatarUrl())
                 .placeholder(UsedConst.imageConst.DEFAULT_IMAGE_CONST)
                 .into(avatarImageView);
     }
