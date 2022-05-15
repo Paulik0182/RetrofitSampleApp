@@ -4,15 +4,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
+import com.android.retrofitsampleapp.UsedConst;
 import com.android.retrofitsampleapp.domain.GitUserEntity;
+import com.bumptech.glide.Glide;
 
 public class GitUsersViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView titleTextView = itemView.findViewById(R.id.title_text_view);
     private final TextView subtitleTextView = itemView.findViewById(R.id.subtitle_text_view);
+    private final AppCompatImageView avatarImageView = itemView.findViewById(R.id.avatar_image_view);
 
     private GitUserEntity user;//звсели user
 
@@ -27,5 +31,10 @@ public class GitUsersViewHolder extends RecyclerView.ViewHolder {
         user = gitUserEntity;//сохранили user в текущей карточке
         titleTextView.setText(gitUserEntity.getLogin());
         subtitleTextView.setText(gitUserEntity.getNodeId());
+
+        Glide.with(this)
+                .load(gitUserEntity)
+                .placeholder(UsedConst.imageConst.DEFAULT_IMAGE_CONST)
+                .into(avatarImageView);
     }
 }

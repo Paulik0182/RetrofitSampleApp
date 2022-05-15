@@ -10,9 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.android.retrofitsampleapp.R;
+import com.android.retrofitsampleapp.UsedConst;
 import com.android.retrofitsampleapp.domain.GitProjectEntity;
 import com.android.retrofitsampleapp.domain.GitUserEntity;
 import com.android.retrofitsampleapp.ui.git_common.BaseGitListActivity;
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -68,7 +70,11 @@ public class ProjectsActivity extends BaseGitListActivity<GitProjectEntity> {
     }
 
     private void setAvatar(String avatarUrl) {
-//        avatarImageView.
+        Glide
+                .with(this)
+                .load(avatarUrl)
+                .placeholder(UsedConst.imageConst.DEFAULT_IMAGE_CONST)
+                .into(avatarImageView);
     }
 
     @Override
