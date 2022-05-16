@@ -1,7 +1,9 @@
 package com.android.retrofitsampleapp.ui.git_common;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -11,7 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.data.GitHubApi;
-import com.android.retrofitsampleapp.ui.common.BaseActivity;
+import com.android.retrofitsampleapp.ui.common.BaseFragment;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public abstract class BaseGitListActivity<T> extends BaseActivity {
+public class BaseGitListFragmenty<T> extends BaseFragment {
 
     protected ProgressBar progressBar;
     protected RecyclerView recyclerView;
@@ -30,12 +32,17 @@ public abstract class BaseGitListActivity<T> extends BaseActivity {
         return gitHubApi;
     }
 
+    @Nullable
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
         gitHubApi = app.getGitHubApi();//достаем из класса App из метода GitHubApi -> gitHubApi.
-        // при этом арр берется в общем классе BaseActivity, ткак-как от этого класса мы наследуемся
+        // при этом арр берется в общем классе BaseFragment, ткак-как от этого класса мы наследуемся
     }
 
     //не понятно, пояснить
@@ -45,7 +52,7 @@ public abstract class BaseGitListActivity<T> extends BaseActivity {
     ) {
         this.progressBar = progressBar;
         this.recyclerView = recyclerView;
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
     protected void showProgress(boolean shouldShow) {
@@ -68,7 +75,7 @@ public abstract class BaseGitListActivity<T> extends BaseActivity {
                     onSuccess(response.body());
 
                 } else {
-                    Toast.makeText(BaseGitListActivity.this, "Error code" + response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), "Error code" + response.code(), Toast.LENGTH_SHORT).show();
                     onError(new Throwable("Error code = " + response.code()));
                 }
             }
@@ -83,9 +90,15 @@ public abstract class BaseGitListActivity<T> extends BaseActivity {
         });
     }
 
-    protected abstract Call<List<T>> getRetrofitCall();
+    protected Call<List<T>> getRetrofitCall() {
+        return null;
+    }
 
-    protected abstract void onSuccess(List<T> data);
+    protected void onSuccess(List<T> data) {
 
-    protected abstract void onError(Throwable t);
+    }
+
+    protected void onError(Throwable t) {
+
+    }
 }

@@ -28,6 +28,8 @@ android {
 dependencies {
     //images glide (библиотека)
     implementation 'com.github.bumptech.glide:glide:4.13.2'
+    implementation 'androidx.navigation:navigation-fragment:2.3.5'
+    implementation 'androidx.navigation:navigation-ui:2.3.5'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.2'
 
     //Retrofit
