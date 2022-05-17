@@ -1,7 +1,6 @@
 package com.android.retrofitsampleapp.ui.projects;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,11 +31,11 @@ public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
     private final GitProjectAdapter adapter = new GitProjectAdapter();
     private ImageView avatarImageView;
 
-    public static Intent getLaunchIntent(Context context, String login) {
-        Intent intent = new Intent(context, ProjectsFragment.class);
-        intent.putExtra(LOGIN_EXTRA_KEY, login);
-        return intent;
-    }
+//    public static Intent getLaunchIntent(Context context, String login) {
+//        Intent intent = new Intent(context, ProjectsFragment.class);
+//        intent.putExtra(LOGIN_EXTRA_KEY, login);
+//        return intent;
+//    }
 
     @Nullable
     @Override
