@@ -1,19 +1,20 @@
-package com.android.retrofitsampleapp.data;
+package com.android.retrofitsampleapp.data.Project;
 
 import android.content.Context;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.android.retrofitsampleapp.domain.GitUserEntity;
-import com.android.retrofitsampleapp.domain.GitUsersRepo;
+import com.android.retrofitsampleapp.data.GitHubApi;
+import com.android.retrofitsampleapp.domain.Project.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.Project.GitProjectRepo;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class RetrofitGitUsersRepoImpl implements GitUsersRepo {
+public class RetrofitGitProjectRepoImpl implements GitProjectRepo {
 
     private final Context context;
 
@@ -21,17 +22,17 @@ public class RetrofitGitUsersRepoImpl implements GitUsersRepo {
     private final GitHubApi gitHubApi;
 
     //конструктор. для получения Api
-    public RetrofitGitUsersRepoImpl(Context context, GitHubApi gitHubApi) {
+    public RetrofitGitProjectRepoImpl(Context context, GitHubApi gitHubApi) {
         this.context = context;
         this.gitHubApi = gitHubApi;
     }
 
     @Override
-    public void getUsers(Callback callback) {
+    public void getProject(Callback callback) {
         //здесь должна быть условная проверка Callback
-        gitHubApi.getUsers().enqueue(new retrofit2.Callback<List<GitUserEntity>>() {
+        gitHubApi.getProject(context.getPackageCodePath()).enqueue(new retrofit2.Callback<List<GitProjectEntity>>() {
             @Override
-            public void onResponse(@NonNull Call<List<GitUserEntity>> call, @NonNull Response<List<GitUserEntity>> response) {
+            public void onResponse(@NonNull Call<List<GitProjectEntity>> call, @NonNull Response<List<GitProjectEntity>> response) {
                 if (response.isSuccessful()) { //isSuccessful - это уже проверка кодов от 200 до 300
                     callback.onSuccess(response.body());// передали список
 
@@ -42,7 +43,7 @@ public class RetrofitGitUsersRepoImpl implements GitUsersRepo {
             }
 
             @Override
-            public void onFailure(@NonNull Call<List<GitUserEntity>> call, @NonNull Throwable t) {
+            public void onFailure(@NonNull Call<List<GitProjectEntity>> call, @NonNull Throwable t) {
                 callback.onError(t);
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
 

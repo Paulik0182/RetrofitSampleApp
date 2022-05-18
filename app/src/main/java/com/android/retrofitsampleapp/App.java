@@ -3,10 +3,11 @@ package com.android.retrofitsampleapp;
 import android.app.Application;
 
 import com.android.retrofitsampleapp.data.GitHubApi;
-import com.android.retrofitsampleapp.data.RetrofitGitProjectRepoImpl;
-import com.android.retrofitsampleapp.data.RetrofitGitUsersRepoImpl;
-import com.android.retrofitsampleapp.domain.GitProjectRepo;
-import com.android.retrofitsampleapp.domain.GitUsersRepo;
+import com.android.retrofitsampleapp.data.Project.RetrofitGitProjectRepoImpl;
+import com.android.retrofitsampleapp.data.Users.CachedGitUsersRepoImpl;
+import com.android.retrofitsampleapp.data.Users.RetrofitGitUsersRepoImpl;
+import com.android.retrofitsampleapp.domain.Project.GitProjectRepo;
+import com.android.retrofitsampleapp.domain.users.GitUsersRepo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -37,9 +38,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        GitUsersRepo networkUsersRepo = new RetrofitGitUsersRepoImpl(this, gitHubApi);
 
         //конкретная реализация RepoImpl
-        gitUsersRepo = new RetrofitGitUsersRepoImpl(this, gitHubApi); //отдали в метод GitUsersRepo
+        gitUsersRepo = new CachedGitUsersRepoImpl(networkUsersRepo); //отдали в метод GitUsersRepo
         gitProjectRepo = new RetrofitGitProjectRepoImpl(this, gitHubApi); //отдали в метод GitProjectRepo
     }
 

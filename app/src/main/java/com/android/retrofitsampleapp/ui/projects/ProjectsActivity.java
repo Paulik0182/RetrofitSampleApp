@@ -15,9 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
 import com.android.retrofitsampleapp.UsedConst;
-import com.android.retrofitsampleapp.domain.GitProjectEntity;
-import com.android.retrofitsampleapp.domain.GitProjectRepo;
-import com.android.retrofitsampleapp.domain.GitUserEntity;
+import com.android.retrofitsampleapp.domain.Project.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.Project.GitProjectRepo;
+import com.android.retrofitsampleapp.domain.users.GitUserEntity;
 import com.android.retrofitsampleapp.ui.common.BaseActivity;
 import com.squareup.picasso.Picasso;
 

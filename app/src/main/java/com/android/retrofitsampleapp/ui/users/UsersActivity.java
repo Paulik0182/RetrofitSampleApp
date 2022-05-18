@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
-import com.android.retrofitsampleapp.domain.GitUserEntity;
-import com.android.retrofitsampleapp.domain.GitUsersRepo;
+import com.android.retrofitsampleapp.domain.users.GitUserEntity;
+import com.android.retrofitsampleapp.domain.users.GitUsersRepo;
 import com.android.retrofitsampleapp.ui.common.BaseActivity;
 import com.android.retrofitsampleapp.ui.projects.ProjectsActivity;
 
@@ -38,7 +38,7 @@ public class UsersActivity extends BaseActivity {
         // а :: означает, что этот метод использовать как лямду чтобы передать его в адаптер
         // и приобразовать его в OnItemClickListener (это синтаксический сахр)
 
-        setLoadButtonOnClick();
+        OnClickLoadButton();
     }
 
     private void loadData() {
@@ -72,7 +72,7 @@ public class UsersActivity extends BaseActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void setLoadButtonOnClick() {
+    private void OnClickLoadButton() {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

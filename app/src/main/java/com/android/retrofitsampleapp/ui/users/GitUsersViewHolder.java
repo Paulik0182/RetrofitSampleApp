@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
 import com.android.retrofitsampleapp.UsedConst;
-import com.android.retrofitsampleapp.domain.GitUserEntity;
+import com.android.retrofitsampleapp.domain.users.GitUserEntity;
 import com.squareup.picasso.Picasso;
 
 public class GitUsersViewHolder extends RecyclerView.ViewHolder {

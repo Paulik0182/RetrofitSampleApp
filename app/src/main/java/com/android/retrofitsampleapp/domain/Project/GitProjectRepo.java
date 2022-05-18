@@ -1,4 +1,4 @@
-package com.android.retrofitsampleapp.domain;
+package com.android.retrofitsampleapp.domain.Project;
 /**
  * Глобально мы делаем рефакторинг.
  * Рефакторинг — это переработка исходного кода программы, чтобы он стал более простым и понятным.
@@ -19,16 +19,16 @@ import java.util.List;
  * Кэшируем список пользователей.
  */
 
-public interface GitUsersRepo {
+public interface GitProjectRepo {
     //    CRUD
     // для реализации необходимо передать Callback, через List реализовать мы не можемю.
     // Для реализации необходим асинхронный подход передать Callback
-    void getUsers(Callback callback);
+    void getProject(Callback callback);
 
     //интерфейс ничего не знающий не retrofit не Room который умеет отдавать пользователей
     interface Callback {
         //метод на вход которого всегда будет приходить список пользователя
-        void onSuccess(List<GitUserEntity> users);
+        void onSuccess(List<GitProjectEntity> projectEntities);
 
         //на вход ошибка
         void onError(Throwable throwable);

@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
-import com.android.retrofitsampleapp.domain.GitUserEntity;
+import com.android.retrofitsampleapp.domain.users.GitUserEntity;
 
 import java.util.ArrayList;
 import java.util.List;

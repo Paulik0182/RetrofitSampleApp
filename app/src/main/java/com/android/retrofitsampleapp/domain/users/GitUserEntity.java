@@ -1,4 +1,4 @@
-package com.android.retrofitsampleapp.domain;
+package com.android.retrofitsampleapp.domain.users;
 
 import com.google.gson.annotations.SerializedName;
 
