@@ -3,6 +3,7 @@ package com.android.retrofitsampleapp;
 import android.app.Application;
 
 import com.android.retrofitsampleapp.data.GitHubApi;
+import com.android.retrofitsampleapp.data.Project.CachedGitProjectRepoImpl;
 import com.android.retrofitsampleapp.data.Project.RetrofitGitProjectRepoImpl;
 import com.android.retrofitsampleapp.data.Users.CachedGitUsersRepoImpl;
 import com.android.retrofitsampleapp.data.Users.RetrofitGitUsersRepoImpl;
@@ -39,10 +40,11 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         GitUsersRepo networkUsersRepo = new RetrofitGitUsersRepoImpl(this, gitHubApi);
+        GitProjectRepo networkProjectsRepo = new RetrofitGitProjectRepoImpl(this, gitHubApi);
 
         //конкретная реализация RepoImpl
         gitUsersRepo = new CachedGitUsersRepoImpl(networkUsersRepo); //отдали в метод GitUsersRepo
-        gitProjectRepo = new RetrofitGitProjectRepoImpl(this, gitHubApi); //отдали в метод GitProjectRepo
+        gitProjectRepo = new CachedGitProjectRepoImpl(networkProjectsRepo); //отдали в метод GitProjectRepo
     }
 
     public GitHubApi getGitHubApi() {
