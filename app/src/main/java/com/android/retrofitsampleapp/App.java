@@ -5,8 +5,8 @@ import android.app.Application;
 import com.android.retrofitsampleapp.data.GitHubApi;
 import com.android.retrofitsampleapp.data.Project.CachedGitProjectRepoImpl;
 import com.android.retrofitsampleapp.data.Project.RetrofitGitProjectRepoImpl;
-import com.android.retrofitsampleapp.data.Users.CachedGitUsersRepoImpl;
 import com.android.retrofitsampleapp.data.Users.RetrofitGitUsersRepoImpl;
+import com.android.retrofitsampleapp.data.Users.SnappyGitUsersRepoImpl;
 import com.android.retrofitsampleapp.domain.Project.GitProjectRepo;
 import com.android.retrofitsampleapp.domain.users.GitUsersRepo;
 
@@ -43,7 +43,7 @@ public class App extends Application {
         GitProjectRepo networkProjectsRepo = new RetrofitGitProjectRepoImpl(this, gitHubApi);
 
         //конкретная реализация RepoImpl
-        gitUsersRepo = new CachedGitUsersRepoImpl(networkUsersRepo); //отдали в метод GitUsersRepo
+        gitUsersRepo = new SnappyGitUsersRepoImpl(this, networkUsersRepo); //отдали в метод GitUsersRepo
         gitProjectRepo = new CachedGitProjectRepoImpl(networkProjectsRepo); //отдали в метод GitProjectRepo
     }
 
