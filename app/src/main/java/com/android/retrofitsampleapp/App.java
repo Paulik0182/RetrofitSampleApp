@@ -3,7 +3,9 @@ package com.android.retrofitsampleapp;
 import android.app.Application;
 
 import com.android.retrofitsampleapp.data.GitHubApi;
+import com.android.retrofitsampleapp.data.RetrofitGitProjectRepoImpl;
 import com.android.retrofitsampleapp.data.RetrofitGitUsersRepoImpl;
+import com.android.retrofitsampleapp.domain.GitProjectRepo;
 import com.android.retrofitsampleapp.domain.GitUsersRepo;
 
 import java.util.concurrent.TimeUnit;
@@ -29,6 +31,7 @@ public class App extends Application {
 
 
     private GitUsersRepo gitUsersRepo;
+    private GitProjectRepo gitProjectRepo;
 
     //context доступен после вызова onCreate, поэтому заводим данный метод
     @Override
@@ -37,6 +40,7 @@ public class App extends Application {
 
         //конкретная реализация RepoImpl
         gitUsersRepo = new RetrofitGitUsersRepoImpl(this, gitHubApi); //отдали в метод GitUsersRepo
+        gitProjectRepo = new RetrofitGitProjectRepoImpl(this, gitHubApi); //отдали в метод GitProjectRepo
     }
 
     public GitHubApi getGitHubApi() {
@@ -45,5 +49,9 @@ public class App extends Application {
 
     public GitUsersRepo getUsersRepo() {
         return gitUsersRepo;
+    }
+
+    public GitProjectRepo getProjectRepo() {
+        return gitProjectRepo;
     }
 }
