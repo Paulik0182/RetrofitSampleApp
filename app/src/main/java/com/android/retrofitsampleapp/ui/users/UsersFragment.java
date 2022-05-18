@@ -1,6 +1,7 @@
 package com.android.retrofitsampleapp.ui.users;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import com.android.retrofitsampleapp.R;
 import com.android.retrofitsampleapp.domain.GitUserEntity;
 import com.android.retrofitsampleapp.ui.git_common.BaseGitListFragmenty;
+import com.android.retrofitsampleapp.ui.projects.ProjectsFragment;
 
 import java.util.List;
 
@@ -64,11 +66,11 @@ public class UsersFragment extends BaseGitListFragmenty<GitUserEntity> {
         Toast.makeText(getContext(), t.getMessage(), Toast.LENGTH_LONG).show();
     }
 
-//    private void openUserScreen(GitUserEntity user) {
-//        Intent intent = ProjectsFragment.getLaunchIntent(this, user.getLogin());
-//        startActivity(intent);
-//        Toast.makeText(getContext(), "Нажали " + user.getLogin(), Toast.LENGTH_SHORT).show();
-//    }
+    private void openUserScreen(GitUserEntity user) {
+        Intent intent = ProjectsFragment.getLaunchIntent(getContext(), user.getLogin());
+        startActivity(intent);
+        Toast.makeText(getContext(), "Нажали " + user.getLogin(), Toast.LENGTH_SHORT).show();
+    }
 
     private void initView(View view) {
         progressBar = view.findViewById(R.id.progress_bar);
@@ -105,7 +107,7 @@ public class UsersFragment extends BaseGitListFragmenty<GitUserEntity> {
 
     //сам контроллер. указываем метод через который вызываем фрагмент (фрагмент с деталями  замиси)
     //обязательно нужно в активити имплементировать (наследоватся от) интерфейс
-    interface Controller {
+    public interface Controller {
         void showUserScreen(GitUserEntity gitUserEntity);
     }
 }

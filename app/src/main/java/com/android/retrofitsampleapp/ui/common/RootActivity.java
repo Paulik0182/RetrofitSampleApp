@@ -6,6 +6,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.retrofitsampleapp.App;
+import com.android.retrofitsampleapp.domain.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.GitUserEntity;
 import com.android.retrofitsampleapp.ui.projects.ProjectsFragment;
 import com.android.retrofitsampleapp.ui.users.UsersFragment;
 
@@ -22,4 +24,13 @@ public class RootActivity extends AppCompatActivity implements UsersFragment.Con
         return (App) getApplication();
     }
 
+    @Override
+    public void showProjectScreen(GitProjectEntity gitProjectEntity) {
+
+    }
+
+    @Override
+    public void showUserScreen(GitUserEntity gitUserEntity) {
+
+    }
 }

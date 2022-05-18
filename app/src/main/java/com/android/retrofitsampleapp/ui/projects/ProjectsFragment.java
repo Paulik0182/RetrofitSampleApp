@@ -1,6 +1,7 @@
 package com.android.retrofitsampleapp.ui.projects;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,11 +32,11 @@ public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
     private final GitProjectAdapter adapter = new GitProjectAdapter();
     private ImageView avatarImageView;
 
-//    public static Intent getLaunchIntent(Context context, String login) {
-//        Intent intent = new Intent(context, ProjectsFragment.class);
-//        intent.putExtra(LOGIN_EXTRA_KEY, login);
-//        return intent;
-//    }
+    public static Intent getLaunchIntent(Context context, String login) {
+        Intent intent = new Intent(context, ProjectsFragment.class);
+        intent.putExtra(LOGIN_EXTRA_KEY, login);
+        return intent;
+    }
 
     @Nullable
     @Override
@@ -48,7 +49,7 @@ public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
         super.onViewCreated(view, savedInstanceState);
 
         initView(view);
-        setTitle(getLogin());//подставили имя в заголовок (не понял как. пояснение.)????
+        getActivity().setTitle(getLogin());//подставили имя в заголовок (не понял как. пояснение.)????
 
         setContractViews(progressBar, recyclerView);
 
@@ -105,7 +106,8 @@ public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
     }
 
     private String getLogin() {
-        return getIntent().getStringExtra(LOGIN_EXTRA_KEY);//получаем логин
+//        return getIntent().getStringExtra(LOGIN_EXTRA_KEY);//получаем логин
+        return "";
     }
 
 
@@ -137,7 +139,7 @@ public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
 
     //сам контроллер. указываем метод через который вызываем фрагмент (фрагмент с деталями  замиси)
     //обязательно нужно в активити имплементировать (наследоватся от) интерфейс
-    interface Controller {
+    public interface Controller {
         void showProjectScreen(GitProjectEntity gitProjectEntity);
     }
 }
