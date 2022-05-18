@@ -2,18 +2,25 @@ package com.android.retrofitsampleapp.ui.users;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
 import com.android.retrofitsampleapp.domain.GitUserEntity;
-import com.android.retrofitsampleapp.ui.git_common.BaseGitListActivity;
+import com.android.retrofitsampleapp.domain.GitUsersRepo;
+import com.android.retrofitsampleapp.ui.common.BaseActivity;
 import com.android.retrofitsampleapp.ui.projects.ProjectsActivity;
 
 import java.util.List;
 
-import retrofit2.Call;
+public class UsersActivity extends BaseActivity {
 
-public class UsersActivity extends BaseGitListActivity<GitUserEntity> {
+    private ProgressBar progressBar;
+    private RecyclerView recyclerView;
 
     private final GitUsersAdapter adapter = new GitUsersAdapter();
 
@@ -24,7 +31,6 @@ public class UsersActivity extends BaseGitListActivity<GitUserEntity> {
         setContentView(R.layout.activity_users);
 
         initView();
-        setContractViews(progressBar, recyclerView);
 
         adapter.setOnItemClickListener(this::openUserScreen);// ::это ссылка на один метод,
         // а :: означает, что этот метод использовать как лямду чтобы передать его в адаптер
@@ -33,19 +39,21 @@ public class UsersActivity extends BaseGitListActivity<GitUserEntity> {
         loadData();
     }
 
-    @Override
-    protected Call<List<GitUserEntity>> getRetrofitCall() {
-        return getGitHubApi().getUsers();
-    }
+    private void loadData() {
+        showProgress(true);
+        app.getUsersRepo().getUsers(new GitUsersRepo.Callback() {
+            @Override
+            public void onSuccess(List<GitUserEntity> users) {
+                showProgress(false);
+                adapter.setData(users);
+            }
 
-    @Override
-    protected void onSuccess(List<GitUserEntity> data) {
-        adapter.setData(data);
-    }
-
-    @Override
-    protected void onError(Throwable t) {
-        Toast.makeText(UsersActivity.this, t.getMessage(), Toast.LENGTH_LONG).show();
+            @Override
+            public void onError(Throwable throwable) {
+                showProgress(false);
+                Toast.makeText(UsersActivity.this, throwable.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     private void openUserScreen(GitUserEntity user) {
@@ -57,6 +65,17 @@ public class UsersActivity extends BaseGitListActivity<GitUserEntity> {
     private void initView() {
         progressBar = findViewById(R.id.progress_bar);
         recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+    }
+
+    protected void showProgress(boolean shouldShow) {
+        if (shouldShow) {
+            recyclerView.setVisibility(View.GONE);//скрываем view со списком
+            progressBar.setVisibility(View.VISIBLE);//показываем прогресс загрузки
+        } else {
+            recyclerView.setVisibility(View.VISIBLE);//показываем view со списком
+            progressBar.setVisibility(View.GONE);//скрываем прогресс загрузки
+        }
     }
 }

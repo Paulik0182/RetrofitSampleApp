@@ -3,6 +3,8 @@ package com.android.retrofitsampleapp;
 import android.app.Application;
 
 import com.android.retrofitsampleapp.data.GitHubApi;
+import com.android.retrofitsampleapp.data.RetrofitGitUsersRepoImpl;
+import com.android.retrofitsampleapp.domain.GitUsersRepo;
 
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +27,23 @@ public class App extends Application {
 
     private final GitHubApi gitHubApi = retrofit.create(GitHubApi.class); //создаем gitHubApi. Автоматически обратится к интерфейсу
 
+
+    private GitUsersRepo gitUsersRepo;
+
+    //context доступен после вызова onCreate, поэтому заводим данный метод
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        //конкретная реализация RepoImpl
+        gitUsersRepo = new RetrofitGitUsersRepoImpl(this, gitHubApi); //отдали в метод GitUsersRepo
+    }
+
     public GitHubApi getGitHubApi() {
         return gitHubApi;
+    }
+
+    public GitUsersRepo getUsersRepo() {
+        return gitUsersRepo;
     }
 }
