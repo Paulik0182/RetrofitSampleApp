@@ -3,6 +3,7 @@ package com.android.retrofitsampleapp.ui.users;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class UsersActivity extends BaseActivity {
 
     private ProgressBar progressBar;
     private RecyclerView recyclerView;
+    private Button loadButton;
 
     private final GitUsersAdapter adapter = new GitUsersAdapter();
 
@@ -36,7 +38,7 @@ public class UsersActivity extends BaseActivity {
         // а :: означает, что этот метод использовать как лямду чтобы передать его в адаптер
         // и приобразовать его в OnItemClickListener (это синтаксический сахр)
 
-        loadData();
+        setLoadButtonOnClick();
     }
 
     private void loadData() {
@@ -65,8 +67,18 @@ public class UsersActivity extends BaseActivity {
     private void initView() {
         progressBar = findViewById(R.id.progress_bar);
         recyclerView = findViewById(R.id.recycler_view);
+        loadButton = findViewById(R.id.load_button);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
+    }
+
+    private void setLoadButtonOnClick() {
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadData();
+            }
+        });
     }
 
     protected void showProgress(boolean shouldShow) {
