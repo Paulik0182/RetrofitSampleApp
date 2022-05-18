@@ -1,8 +1,13 @@
 package com.android.retrofitsampleapp.domain;
 
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class GitUserEntity {
+@SuppressLint("ParcelCreator")
+public class GitUserEntity implements Parcelable {
 
     private int id;
     private String login;
@@ -50,5 +55,15 @@ public class GitUserEntity {
 
     public void setAvatarUrl(String avatarUrl) {
         this.avatarUrl = avatarUrl;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

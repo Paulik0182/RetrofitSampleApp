@@ -1,7 +1,6 @@
 package com.android.retrofitsampleapp.ui.projects;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,15 +26,24 @@ import retrofit2.Response;
 
 public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
 
+    private static final String GIT_PROJECT_ENTITY_KEY = "GIT_PROJECT_ENTITY_KEY";
     private static final String LOGIN_EXTRA_KEY = "LOGIN_EXTRA_KEY";
 
     private final GitProjectAdapter adapter = new GitProjectAdapter();
+
+    private GitProjectEntity gitProjectEntity;
     private ImageView avatarImageView;
 
-    public static Intent getLaunchIntent(Context context, String login) {
-        Intent intent = new Intent(context, ProjectsFragment.class);
-        intent.putExtra(LOGIN_EXTRA_KEY, login);
-        return intent;
+    public ProjectsFragment() {
+    }
+
+    public static ProjectsFragment newInstance(GitProjectEntity gitProjectEntity) {
+        Bundle args = new Bundle();
+        args.putParcelable(GIT_PROJECT_ENTITY_KEY, gitProjectEntity);
+
+        ProjectsFragment fragment = new ProjectsFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     @Nullable
@@ -52,6 +60,7 @@ public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
         getActivity().setTitle(getLogin());//подставили имя в заголовок (не понял как. пояснение.)????
 
         setContractViews(progressBar, recyclerView);
+        gitProjectEntity = getArguments().getParcelable(GIT_PROJECT_ENTITY_KEY);
 
         loadUser(getLogin());
         loadData();
@@ -106,12 +115,10 @@ public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
     }
 
     private String getLogin() {
-//        return getIntent().getStringExtra(LOGIN_EXTRA_KEY);//получаем логин
-        return "";
+        return getActivity().getIntent().getStringExtra(LOGIN_EXTRA_KEY);//получаем логин
     }
 
 
-    //метод для открытия отдельной заметки
     private void showProjectScreen(GitProjectEntity gitProjectEntity) {
         getController().showProjectScreen(gitProjectEntity);
         //для того чтобы фрагмент знал что-то об активети,
