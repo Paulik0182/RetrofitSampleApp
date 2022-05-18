@@ -1,10 +1,16 @@
 package com.android.retrofitsampleapp.domain.Project;
 
-public class GitProjectEntity {
+import java.io.Serializable;
+
+public class GitProjectEntity implements Serializable {
 
     private int id;
     private String name;
     private String description;
+
+    public GitProjectEntity() {
+
+    }
 
     public GitProjectEntity(int id, String name, String description) {
         this.id = id;
