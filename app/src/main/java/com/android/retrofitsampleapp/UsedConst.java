@@ -25,4 +25,8 @@ public final class UsedConst {
     public interface imageConst {
         int DEFAULT_IMAGE_CONST = R.drawable.ic_launcher_foreground;
     }
+
+    public interface bdConstKey {
+        String USERS_BD_KEY = "USERS_BD_KEY";
+    }
 }

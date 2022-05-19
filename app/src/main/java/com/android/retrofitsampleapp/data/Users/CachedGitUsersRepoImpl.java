@@ -18,6 +18,11 @@ public class CachedGitUsersRepoImpl implements GitUsersRepo {
         this.networkUsersRepo = networkUsersRepo;
     }
 
+    @Override
+    public void saveUsers(List<GitUserEntity> users) {
+        //pass
+    }
+
     //когда ктото запрашивает пользователей, он идет в другой такойже репозиторий
     // (репозиторий который может в интернет ходить) и если успех -> запишет кэш (onSuccess),
     // а если не успех, то он вернет результат из памяти (onError)
@@ -29,7 +34,6 @@ public class CachedGitUsersRepoImpl implements GitUsersRepo {
                 cache = users;
                 callback.onSuccess(users);
             }
-
             @Override
             public void onError(Throwable throwable) {
                 callback.onError(throwable);

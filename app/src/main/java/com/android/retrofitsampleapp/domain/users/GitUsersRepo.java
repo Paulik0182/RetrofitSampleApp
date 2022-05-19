@@ -21,6 +21,11 @@ import java.util.List;
 
 public interface GitUsersRepo {
     //    CRUD
+
+    // расширяем репозиторий.
+    void saveUsers(List<GitUserEntity> users);
+
+
     // для реализации необходимо передать Callback, через List реализовать мы не можемю.
     // Для реализации необходим асинхронный подход передать Callback
     void getUsers(Callback callback);
