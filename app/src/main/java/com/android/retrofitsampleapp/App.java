@@ -3,8 +3,9 @@ package com.android.retrofitsampleapp;
 import android.app.Application;
 
 import com.android.retrofitsampleapp.data.GitHubApi;
+import com.android.retrofitsampleapp.data.Project.CachedNetworkProjectRepoImpl;
 import com.android.retrofitsampleapp.data.Project.RetrofitGitProjectRepoImpl;
-import com.android.retrofitsampleapp.data.Project.SnappyGitProjectRepoImpl;
+import com.android.retrofitsampleapp.data.Project.SnappyDbGitProjectRepoImpl;
 import com.android.retrofitsampleapp.data.Users.CachedNetworkUsersRepoImpl;
 import com.android.retrofitsampleapp.data.Users.RetrofitGitUsersRepoImpl;
 import com.android.retrofitsampleapp.data.Users.SnappyDbGitUsersRepoImpl;
@@ -40,13 +41,15 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        GitUsersRepo localRepo = new SnappyDbGitUsersRepoImpl(this);
+        GitUsersRepo UsersLocalRepo = new SnappyDbGitUsersRepoImpl(this);
         GitUsersRepo networkUsersRepo = new RetrofitGitUsersRepoImpl(this, gitHubApi);
+
+        GitProjectRepo ProjectLocalRepo = new SnappyDbGitProjectRepoImpl(this);
         GitProjectRepo networkProjectsRepo = new RetrofitGitProjectRepoImpl(this, gitHubApi);
 
         //конкретная реализация RepoImpl
-        gitUsersRepo = new CachedNetworkUsersRepoImpl(networkUsersRepo, localRepo); //отдали в метод GitUsersRepo
-        gitProjectRepo = new SnappyGitProjectRepoImpl(this, networkProjectsRepo); //отдали в метод GitProjectRepo
+        gitUsersRepo = new CachedNetworkUsersRepoImpl(networkUsersRepo, UsersLocalRepo); //отдали в метод GitUsersRepo
+        gitProjectRepo = new CachedNetworkProjectRepoImpl(networkProjectsRepo, ProjectLocalRepo); //отдали в метод GitProjectRepo
     }
 
     public GitHubApi getGitHubApi() {

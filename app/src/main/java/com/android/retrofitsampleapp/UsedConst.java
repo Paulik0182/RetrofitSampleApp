@@ -28,5 +28,6 @@ public final class UsedConst {
 
     public interface bdConstKey {
         String USERS_BD_KEY = "USERS_BD_KEY";
+        String PROJECT_BD_KEY = "PROJECT_BD_KEY";
     }
 }

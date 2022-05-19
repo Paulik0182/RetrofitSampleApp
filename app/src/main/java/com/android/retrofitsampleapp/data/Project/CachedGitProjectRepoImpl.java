@@ -25,6 +25,11 @@ public class CachedGitProjectRepoImpl extends Application implements GitProjectR
     // а если не успех, то он вернет результат из памяти (onError)
 
     @Override
+    public void saveProject(List<GitProjectEntity> projectEntities) {
+        //pass
+    }
+
+    @Override
     public void getProject(Callback callback) {
         networkProjectRepo.getProject(new Callback() {
             @Override

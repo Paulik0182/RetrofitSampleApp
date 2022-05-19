@@ -21,6 +21,10 @@ import java.util.List;
 
 public interface GitProjectRepo {
     //    CRUD
+
+    // расширяем репозиторий.
+    void saveProject(List<GitProjectEntity> projectEntities);
+
     // для реализации необходимо передать Callback, через List реализовать мы не можемю.
     // Для реализации необходим асинхронный подход передать Callback
     void getProject(Callback callback);

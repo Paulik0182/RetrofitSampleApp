@@ -28,6 +28,11 @@ public class RetrofitGitProjectRepoImpl implements GitProjectRepo {
     }
 
     @Override
+    public void saveProject(List<GitProjectEntity> projectEntities) {
+        //pass
+    }
+
+    @Override
     public void getProject(Callback callback) {
         //здесь должна быть условная проверка Callback
         gitHubApi.getProject(context.getPackageCodePath()).enqueue(new retrofit2.Callback<List<GitProjectEntity>>() {
@@ -46,7 +51,6 @@ public class RetrofitGitProjectRepoImpl implements GitProjectRepo {
             public void onFailure(@NonNull Call<List<GitProjectEntity>> call, @NonNull Throwable t) {
                 callback.onError(t);
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
-
             }
         });
     }
