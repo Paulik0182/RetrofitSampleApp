@@ -1,4 +1,4 @@
-package com.android.retrofitsampleapp.domain.Project;
+package com.android.retrofitsampleapp.domain.project;
 
 import java.io.Serializable;
 

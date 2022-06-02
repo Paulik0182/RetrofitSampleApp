@@ -1,4 +1,4 @@
-package com.android.retrofitsampleapp.domain.Project;
+package com.android.retrofitsampleapp.domain.project;
 /**
  * Глобально мы делаем рефакторинг.
  * Рефакторинг — это переработка исходного кода программы, чтобы он стал более простым и понятным.

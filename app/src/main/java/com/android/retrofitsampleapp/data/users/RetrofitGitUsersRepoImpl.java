@@ -1,4 +1,4 @@
-package com.android.retrofitsampleapp.data.Users;
+package com.android.retrofitsampleapp.data.users;
 
 import android.content.Context;
 import android.widget.Toast;

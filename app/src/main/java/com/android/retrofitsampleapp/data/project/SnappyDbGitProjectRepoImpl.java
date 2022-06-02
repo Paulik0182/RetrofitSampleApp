@@ -1,11 +1,11 @@
-package com.android.retrofitsampleapp.data.Project;
+package com.android.retrofitsampleapp.data.project;
 
 import android.content.Context;
 import android.widget.Toast;
 
 import com.android.retrofitsampleapp.UsedConst;
-import com.android.retrofitsampleapp.domain.Project.GitProjectEntity;
-import com.android.retrofitsampleapp.domain.Project.GitProjectRepo;
+import com.android.retrofitsampleapp.domain.project.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.project.GitProjectRepo;
 import com.snappydb.DB;
 import com.snappydb.DBFactory;
 import com.snappydb.SnappydbException;

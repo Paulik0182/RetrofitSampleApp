@@ -1,4 +1,4 @@
-package com.android.retrofitsampleapp.data.Users;
+package com.android.retrofitsampleapp.data.users;
 
 import com.android.retrofitsampleapp.domain.users.GitUserEntity;
 import com.android.retrofitsampleapp.domain.users.GitUsersRepo;

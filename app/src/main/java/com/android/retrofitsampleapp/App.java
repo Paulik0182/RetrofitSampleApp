@@ -3,13 +3,13 @@ package com.android.retrofitsampleapp;
 import android.app.Application;
 
 import com.android.retrofitsampleapp.data.GitHubApi;
-import com.android.retrofitsampleapp.data.Project.CachedNetworkProjectRepoImpl;
-import com.android.retrofitsampleapp.data.Project.RetrofitGitProjectRepoImpl;
-import com.android.retrofitsampleapp.data.Project.SnappyDbGitProjectRepoImpl;
-import com.android.retrofitsampleapp.data.Users.CachedNetworkUsersRepoImpl;
-import com.android.retrofitsampleapp.data.Users.RetrofitGitUsersRepoImpl;
-import com.android.retrofitsampleapp.data.Users.SnappyDbGitUsersRepoImpl;
-import com.android.retrofitsampleapp.domain.Project.GitProjectRepo;
+import com.android.retrofitsampleapp.data.project.CachedNetworkProjectRepoImpl;
+import com.android.retrofitsampleapp.data.project.RetrofitGitProjectRepoImpl;
+import com.android.retrofitsampleapp.data.project.SnappyDbGitProjectRepoImpl;
+import com.android.retrofitsampleapp.data.users.CachedNetworkUsersRepoImpl;
+import com.android.retrofitsampleapp.data.users.RetrofitGitUsersRepoImpl;
+import com.android.retrofitsampleapp.data.users.SnappyDbGitUsersRepoImpl;
+import com.android.retrofitsampleapp.domain.project.GitProjectRepo;
 import com.android.retrofitsampleapp.domain.users.GitUsersRepo;
 
 import java.util.concurrent.TimeUnit;
