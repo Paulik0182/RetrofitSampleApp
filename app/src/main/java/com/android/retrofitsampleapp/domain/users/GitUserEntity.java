@@ -1,8 +1,10 @@
-package com.android.retrofitsampleapp.domain;
+package com.android.retrofitsampleapp.domain.users;
 
 import com.google.gson.annotations.SerializedName;
 
-public class GitUserEntity {
+import java.io.Serializable;
+
+public class GitUserEntity implements Serializable {
 
     private int id;
     private String login;
@@ -12,6 +14,10 @@ public class GitUserEntity {
 
     @SerializedName("node_id")
     private String nodeId;
+
+    public GitUserEntity() {
+
+    }
 
     public GitUserEntity(int id, String name, String description, String avatarUrl) {
         this.id = id;
