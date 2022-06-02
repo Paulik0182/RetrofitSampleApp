@@ -115,7 +115,8 @@ public class ProjectsFragment extends BaseGitListFragmenty<GitProjectEntity> {
     }
 
     private String getLogin() {
-        return getActivity().getIntent().getStringExtra(LOGIN_EXTRA_KEY);//получаем логин
+        assert getArguments() != null;
+        return getArguments().getParcelable(LOGIN_EXTRA_KEY);//получаем логин
     }
 
 

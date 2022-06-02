@@ -68,6 +68,7 @@ public class UsersFragment extends BaseGitListFragmenty<GitUserEntity> {
         progressBar = view.findViewById(R.id.progress_bar);
         recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(listener);
     }
 
 
