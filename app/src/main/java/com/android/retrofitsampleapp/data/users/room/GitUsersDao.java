@@ -5,7 +5,6 @@ import androidx.room.Insert;
 import androidx.room.Query;
 
 import com.android.retrofitsampleapp.domain.users.GitUserEntity;
-import com.android.retrofitsampleapp.domain.users.GitUsersRepo;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface GitUsersDao {
     // Для реализации необходим асинхронный подход передать Callback
     @Query("SELECT * FROM users")
     // users это название таблицы (или можно указать класс сущьности). Мы получаем все из таблиыц users
-    void getUsers(GitUsersRepo.Callback callback);
+    List<GitUserEntity> getUsers();
 
 //    @Delete
 //    void delete(User user);
