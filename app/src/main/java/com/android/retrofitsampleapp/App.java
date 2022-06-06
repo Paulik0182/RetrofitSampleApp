@@ -1,6 +1,8 @@
 package com.android.retrofitsampleapp;
 
 import android.app.Application;
+import android.os.Handler;
+import android.os.Looper;
 
 import androidx.room.Room;
 
@@ -50,7 +52,9 @@ public class App extends Application {
         db = Room.databaseBuilder(getApplicationContext(),
                 RoomDb.class, "database-name").build();
 
-        GitUsersRepo usersLocalRepo = new RoomGitUsersRepoImpl(db.gitUsersDao());
+        Handler handler = new Handler(Looper.getMainLooper());//главный поток
+
+        GitUsersRepo usersLocalRepo = new RoomGitUsersRepoImpl(db.gitUsersDao(), handler);
         GitUsersRepo networkUsersRepo = new RetrofitGitUsersRepoImpl(this, gitHubApi);
 
         GitProjectRepo ProjectLocalRepo = new SnappyDbGitProjectRepoImpl(this);
