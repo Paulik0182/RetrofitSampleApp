@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-@Entity
+@Entity(tableName = "users") // это название таблицы
 public class GitUserEntity implements Serializable {
 
     @PrimaryKey //уникальный ключ
