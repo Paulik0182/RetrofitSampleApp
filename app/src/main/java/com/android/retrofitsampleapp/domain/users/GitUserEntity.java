@@ -1,18 +1,26 @@
 package com.android.retrofitsampleapp.domain.users;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
+@Entity
 public class GitUserEntity implements Serializable {
 
+    @PrimaryKey //уникальный ключ
     private int id;
     private String login;
 
     @SerializedName("avatar_url")
+    @ColumnInfo(name = "avatar_url")
     private String avatarUrl;
 
     @SerializedName("node_id")
+    @ColumnInfo(name = "node_id")
     private String nodeId;
 
     public GitUserEntity() {
