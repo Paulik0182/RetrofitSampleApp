@@ -1,6 +1,11 @@
 package com.android.retrofitsampleapp.domain;
 
-public class GitProjectEntity {
+import android.annotation.SuppressLint;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+@SuppressLint("ParcelCreator")
+public class GitProjectEntity implements Parcelable {
 
     private int id;
     private String name;
@@ -34,5 +39,15 @@ public class GitProjectEntity {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }

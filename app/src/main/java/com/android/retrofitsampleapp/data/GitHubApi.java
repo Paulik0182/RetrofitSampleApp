@@ -16,4 +16,7 @@ public interface GitHubApi {
 
     @GET("users/{user}/repos")
     Call<List<GitProjectEntity>> getProject(@Path("user") String user);
+
+    @GET("users/{user}")
+    Call<GitUserEntity> getUser(@Path("user") String user);
 }
