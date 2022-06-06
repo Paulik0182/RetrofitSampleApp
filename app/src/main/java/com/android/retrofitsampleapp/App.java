@@ -61,7 +61,7 @@ public class App extends Application {
         GitProjectRepo networkProjectsRepo = new RetrofitGitProjectRepoImpl(this, gitHubApi);
 
         //конкретная реализация RepoImpl
-        gitUsersRepo = new CachedNetworkUsersRepoImpl(usersLocalRepo, networkUsersRepo); //отдали в метод GitUsersRepo
+        gitUsersRepo = new CachedNetworkUsersRepoImpl(networkUsersRepo, usersLocalRepo); //отдали в метод GitUsersRepo
         gitProjectRepo = new CachedNetworkProjectRepoImpl(networkProjectsRepo, ProjectLocalRepo); //отдали в метод GitProjectRepo
     }
 
