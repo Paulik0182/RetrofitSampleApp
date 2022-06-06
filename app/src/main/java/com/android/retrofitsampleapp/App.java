@@ -8,9 +8,9 @@ import com.android.retrofitsampleapp.data.GitHubApi;
 import com.android.retrofitsampleapp.data.project.CachedNetworkProjectRepoImpl;
 import com.android.retrofitsampleapp.data.project.RetrofitGitProjectRepoImpl;
 import com.android.retrofitsampleapp.data.project.SnappyDbGitProjectRepoImpl;
+import com.android.retrofitsampleapp.data.users.CachedNetworkUsersRepoImpl;
 import com.android.retrofitsampleapp.data.users.RetrofitGitUsersRepoImpl;
 import com.android.retrofitsampleapp.data.users.RoomGitUsersRepoImpl;
-import com.android.retrofitsampleapp.data.users.SnappyDbGitUsersRepoImpl;
 import com.android.retrofitsampleapp.data.users.room.RoomDb;
 import com.android.retrofitsampleapp.domain.project.GitProjectRepo;
 import com.android.retrofitsampleapp.domain.users.GitUsersRepo;
@@ -46,18 +46,18 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        GitUsersRepo UsersLocalRepo = new SnappyDbGitUsersRepoImpl(this);
+        //инициализируем БД
+        db = Room.databaseBuilder(getApplicationContext(),
+                RoomDb.class, "database-name").build();
+
+        GitUsersRepo usersLocalRepo = new RoomGitUsersRepoImpl(db.gitUsersDao());
         GitUsersRepo networkUsersRepo = new RetrofitGitUsersRepoImpl(this, gitHubApi);
 
         GitProjectRepo ProjectLocalRepo = new SnappyDbGitProjectRepoImpl(this);
         GitProjectRepo networkProjectsRepo = new RetrofitGitProjectRepoImpl(this, gitHubApi);
 
-        //инициализируем БД
-        db = Room.databaseBuilder(getApplicationContext(),
-                RoomDb.class, "database-name").build();
-
         //конкретная реализация RepoImpl
-        gitUsersRepo = new RoomGitUsersRepoImpl(db.gitUsersDao()); //отдали в метод GitUsersRepo
+        gitUsersRepo = new CachedNetworkUsersRepoImpl(usersLocalRepo, networkUsersRepo); //отдали в метод GitUsersRepo
         gitProjectRepo = new CachedNetworkProjectRepoImpl(networkProjectsRepo, ProjectLocalRepo); //отдали в метод GitProjectRepo
     }
 
