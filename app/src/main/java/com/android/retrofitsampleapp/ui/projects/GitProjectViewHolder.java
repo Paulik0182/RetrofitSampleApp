@@ -1,4 +1,4 @@
-package com.android.retrofitsampleapp.ui;
+package com.android.retrofitsampleapp.ui.projects;
 
 import android.view.View;
 import android.widget.TextView;
@@ -7,7 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.retrofitsampleapp.R;
-import com.android.retrofitsampleapp.domain.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.project.GitProjectEntity;
 
 public class GitProjectViewHolder extends RecyclerView.ViewHolder {
 

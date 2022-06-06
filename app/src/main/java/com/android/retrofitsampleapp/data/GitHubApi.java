@@ -1,7 +1,7 @@
 package com.android.retrofitsampleapp.data;
 
-import com.android.retrofitsampleapp.domain.GitProjectEntity;
-import com.android.retrofitsampleapp.domain.GitUserEntity;
+import com.android.retrofitsampleapp.domain.project.GitProjectEntity;
+import com.android.retrofitsampleapp.domain.users.GitUserEntity;
 
 import java.util.List;
 
@@ -16,4 +16,7 @@ public interface GitHubApi {
 
     @GET("users/{user}/repos")
     Call<List<GitProjectEntity>> getProject(@Path("user") String user);
+
+    @GET("users/{user}")
+    Call<GitUserEntity> getUser(@Path("user") String user);
 }

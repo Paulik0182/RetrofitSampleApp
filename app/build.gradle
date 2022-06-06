@@ -23,14 +23,30 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    namespace 'com.android.retrofitsampleapp'
 }
 
 dependencies {
+
+    //ROOM библиотека
+    def room_version = "2.4.2"
+    implementation "androidx.room:room-runtime:$room_version"
+    //room очень часто использует анотации поэтому необходимо прописать annotationProcessor (обработчик анатации)
+    // (это такие пометки, тэги для компилятора). room построен на кодо генерации.
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+
+    //images library (библиотека)
+    implementation 'com.squareup.picasso:picasso:2.8'
+
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'com.google.android.material:material:1.5.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
+    //snappyDB
+    implementation 'com.snappydb:snappydb-lib:0.5.2'
+    implementation 'com.esotericsoftware.kryo:kryo:2.24.0'
+
+    implementation 'androidx.appcompat:appcompat:1.4.2'
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 }
